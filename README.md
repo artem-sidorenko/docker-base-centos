@@ -4,7 +4,7 @@ Docker base centos image
 Introduction
 ============
 
-Yes, here is another docker base image :) This image is intentended to be used as base image to build other images on top.
+Yes, here is another docker base image :) This image is intented to be used as base image to build other images on top.
 
 This image is based on [centos/centos7](https://registry.hub.docker.com/_/centos/) image, see [docker-base-ubuntu](https://github.com/artem-sidorenko/docker-base-ubuntu) for a similar image with ubuntu.
 

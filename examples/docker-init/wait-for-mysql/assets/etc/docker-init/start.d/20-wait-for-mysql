@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# Wait for mysql to get available
+# https://github.com/artem-sidorenko/docker-base-centos
+#
+# Author Artem Sidorenko artem@2realities.com
+#
+# Copyright 2015 Artem Sidorenko and contributors.
+# See the COPYRIGHT file at the top-level directory of this distribution
+# and at https://github.com/artem-sidorenko/docker-base-centos/blob/master/COPYRIGHT
+#
+
+# Following environment variables are expected:
+#
+# - MYSQL_HOST
+# - MYSQL_PORT
+
+MYSQL_LOOPS="10"
+
+#wait for mysql
+i=0
+while ! nc $MYSQL_HOST $MYSQL_PORT >/dev/null 2>&1 < /dev/null; do
+  i=`expr $i + 1`
+  if [ $i -ge $MYSQL_LOOPS ]; then
+    echo "$(date) - ${MYSQL_HOST}:${MYSQL_PORT} still not reachable, giving up"
+    exit 1
+  fi
+  echo "$(date) - waiting for ${MYSQL_HOST}:${MYSQL_PORT}..."
+  sleep 1
+done

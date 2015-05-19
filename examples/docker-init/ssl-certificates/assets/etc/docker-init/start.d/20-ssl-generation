@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Generate SSL certificates if needed
+# https://github.com/artem-sidorenko/docker-base-centos
+#
+# Author Artem Sidorenko artem@2realities.com
+#
+# Copyright 2015 Artem Sidorenko and contributors.
+# See the COPYRIGHT file at the top-level directory of this distribution
+# and at https://github.com/artem-sidorenko/docker-base-centos/blob/master/COPYRIGHT
+#
+
+SSL_LOCATION="/var/lib/docker-state/ssl"
+SSL_CERT="$(SSL_LOCATION)/cert.pem"
+SSL_PRIVATE="$(SSL_LOCATION)/private.pem"
+
+#Generate the certificates if needed
+if [ ! -f "$SSL_PRIVATE" -o ! -f "$SSL_CERT" ]; then
+  echo "$(date) - no SSL certificate present, generating..."
+  hostname=$(hostname -f)
+  openssl req -utf8 -newkey rsa:4096 -keyout $SSL_PRIVATE -nodes -x509 -days 10 -out $SSL_CERT -batch -subj "/CN=$hostname"
+  chmod 600 $SSL_PRIVATE $SSL_CERT
+fi
