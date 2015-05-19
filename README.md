@@ -25,13 +25,13 @@ How to use it
   - Create and add the according files for initialization or supervisord configuration. See examples below for it
 
 Example Dockerfile can look likes this
-```
-FROM artemsidorenko/base-centos
-MAINTAINER Artem Sidorenko <artem@2realities.com>
 
-COPY assets/etc /etc
-...
-```
+    FROM artemsidorenko/base-centos
+    MAINTAINER Artem Sidorenko <artem@2realities.com>
+    
+    COPY assets/etc /etc
+    ...
+
 
 Folder structure
 ================
