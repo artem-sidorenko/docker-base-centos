@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# docker init system for docker base image
+# https://github.com/artem-sidorenko/docker-base-centos
+#
+# Author Artem Sidorenko artem@2realities.com
+#
+# Copyright 2015 Artem Sidorenko and contributors.
+# See the COPYRIGHT file at the top-level directory of this distribution
+# and at https://github.com/artem-sidorenko/docker-base-centos/blob/master/COPYRIGHT
+#
+
+#configuration
+startDir="/etc/docker-init/start.d/"
+finishCmd="supervisord -c/etc/supervisord.conf"
+
+for s in `find $startDir -executable -type f|sort`; do
+  eval $s
+  status=$?
+  if [ $status -ne 0 ]; then
+    exit $status
+  fi
+done
+
+exec $finishCmd
