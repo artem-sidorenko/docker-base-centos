@@ -14,7 +14,7 @@ MAINTAINER Artem Sidorenko <artem@2realities.com>
 VOLUME /var/log
 VOLUME /var/lib/docker-state
 
-RUN yum -y update; yum -y install net-tools hostname epel-release; yum clean all
+RUN yum -y update; yum -y install net-tools hostname epel-release yum-utils; yum clean all
 
 RUN yum -y install supervisor; yum clean all
 
